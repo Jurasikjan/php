@@ -34,11 +34,11 @@ $name1["Ivan"]="Alex";
 $name1["Will"]="Jef";
 $name1["Spec"]="Yary";
 
-foreach ($name1 as $k => $v)
-    echo $k." = ".$v ."<br>";
+foreach ($name1 as $k => $v) {
+    echo $k . " = " . $v . "<br>";
+}
 
-echo "define('masiv',
-        [\"ivanov\" => [\"name\" => \"ivan\",\"born\" => \"12-03-1990\"]] массив константа<br>";
+echo "define('masiv',[\"ivanov\" => [\"name\" => \"ivan\",\"born\" => \"12-03-1990\"]] массив константа<br>";
 define('masiv',
         ["ivanov" => ["name" => "ivan","born" => "12-03-1990"]]
 );
@@ -61,5 +61,7 @@ foreach ($all as $k => $v)
 
 
 ?>
+
+
 </body>
 </html>

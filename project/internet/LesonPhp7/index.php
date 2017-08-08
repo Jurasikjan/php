@@ -35,11 +35,14 @@ echo "<br>";
 echo "$a=array('a'=>'apple','b'=>'car','c'=>'bay'); массив<br>
 print_r($a); вывод массива";
 echo "<br>";
-
+echo "<br> value ".htmlentities($_COOKIE["user"]);
 ?>
 <br>
-<a href="stroki.php">Stroki</a>
-<a href="cikl.php">cikl</a>
-<a href="massiv.php">massiv</a>
+<a href="stroki.php">Stroki</a><br>
+<a href="cikl.php">cikl</a><br>
+<a href="massiv.php">massiv</a><br>
+<a href="vstavkaStranici.php">vstavkaStranici</a><br>
+<a href="forms.php">forms</a><br>
+<a href="coocies.php">coocies</a><br>
 </body>
 </html>
