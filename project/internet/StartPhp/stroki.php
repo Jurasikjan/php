@@ -19,3 +19,24 @@ printf($format1,$percent,$total,$city);
 echo "<br>";
 $rez= sprintf($format,$percent,$total,$city);// возвращает результат
 echo "<br>";
+
+$str ='some string';
+
+echo $str.' - '.strlen($str).'<hr/>'; //длина строки
+
+echo 'substr($str,5,6) - ';
+echo substr($str,5,6).'<hr/><br/>';//получаем часть строки
+
+echo str_replace('s',' ',$str).'<hr/>';//замена символов s на пробел
+echo str_replace('some','!',$str).'<hr/>';//замена слова s на пробел
+echo str_replace(array('s','n'),'!',$str).'<hr/>';//массив символов
+echo str_replace(array('s','n'),array('1','2'),$str).'<hr/>';//массив символов на масив символов
+
+$str1='Разделитель. строк на. массив';
+$rez=explode('.',$str1); //разбивает строку на масив по символу
+echo '$str1=\'Разделитель. строк на. массив\'; $rez=explode(\'.\',$str1); <pre>';
+print_r($rez);
+echo '</pre><hr/>';
+
+echo implode('!',$rez).'<br/>';//склкеиваем масиив в строку символом !
+echo implode('',$rez).'<hr/>';
