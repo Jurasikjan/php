@@ -15,3 +15,4 @@ echo "<a href='dataAndTime.php'>dataAndTime</a><br>";
 echo "<a href='podkluchFail.php'>podkluchFail</a><br>";
 echo "<a href='podkluchFail.php'>podkluchFail</a><br><hr/>";
 echo "<a href='less8/osnovaHTTP.php'>osnovaHTTP</a><br>";
+echo "<a href='forms.php'>forms</a><br>";

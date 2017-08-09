@@ -17,6 +17,15 @@
     <title>Document</title>
 </head>
 <body>
-    <img src="img/shema1.png" style="width: 150px;height: 100px">
+<img src="img/shema1.png" style="width: 150px;height: 100px">
+<pre>
+            <?php
+            print_r($_SERVER);
+            ?>
+    </pre>
+<hr/>
+<?php
+// phpinfo();
+?>
 </body>
 </html>
