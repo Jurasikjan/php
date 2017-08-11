@@ -6,7 +6,7 @@ echo "<a href='http://php.net/manual/ru/array.sorting.php'>Сортировка 
 echo "<a href='http://php.net/manual/ru/ref.array.php'>Функции для работы с массивами</a><br>";
 echo "<a href='http://php.net/manual/ru/ref.math.php'>Математические функции</a><br>";
 echo "<a href='https://php-start.com/course/php-start-theory'>php-start</a><br>";
-echo "<a></a><br>";
+echo "<br>";
 echo "<a href='massiv.php'>massiv</a><br>";
 echo "<a href='stroki.php'>stroki</a><br>";
 echo "<a href='mathematFun.php'>mathematFun</a><br>";
@@ -18,3 +18,4 @@ echo "<a href='less8/osnovaHTTP.php'>osnovaHTTP</a><br>";
 echo "<a href='forms.php'>forms</a><br>";
 echo "<a href='cooci.php'>coociAndSession</a><br>";
 echo "<a href='session.php'>session</a><br>";
+echo "<a href='bd/index.php'>BD</a><br>";
