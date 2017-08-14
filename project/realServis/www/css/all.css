@@ -1,0 +1,118 @@
+body {
+	color: #000;
+	width: 100%;
+	height: 100%;
+	font: 12px/14px arial, helvetica, sans-serif;
+}
+img {border-style: none;}
+a {
+	color: #0B00AD;
+	text-decoration: none;
+}
+/*a:hover {text-decoration: underline;}
+ General settings */
+
+#wrapper {
+	
+	/*width: 1200px;*/
+	text-align: center;
+margin:0 auto;
+	
+
+	
+}
+#head{
+	height: 130px;
+font: 20px/14px sans-serif;
+
+	
+}
+
+.text{
+
+    background-color: #5E7EC2;
+    text-align: center;
+    overflow: auto;
+    width: 80%;    
+    margin: 15px 0 0 0px; 
+    font: 17px/26px sans-serif;
+    padding: 15px 15px 15px 15px;
+    border-radius: 10px;
+    float: left;
+}
+
+#menu{
+	
+	        margin: 0 2% 0 84%;
+}
+
+#kknopa{
+	margin: 0;
+}
+.knopa{
+	 margin: 52px 0 0 0;
+    font-weight: bolder;
+    font-size: 15px;
+    border: 3px solid #5E7EC2;
+    padding: 5px 5px 5px 5px;
+    border-radius: 10px;
+    background-color: #F0F3F2;
+    max-width: 130px;
+    min-width: 130px;
+}
+/*price*/
+
+
+.NPZ{
+	    padding:0 45px 0 20px;
+    text-align: left;
+}
+.pri{
+	padding: 5px 25px 5px 25px; 
+}
+#footer{
+	margin: 0 105px 0 0px;
+	font-weight: bolder;
+}
+.strokaprice{
+	background-color: #F0F3F2;
+}
+.strokaprice2{
+	background-color: #D0D0D0;
+}
+.tab{
+	 border: 1px solid black;
+	 width: 100%;
+
+}
+.tab td{
+border: 1px solid black;
+}
+.informaciy{
+	text-align: left;
+	padding: 0 15px 0 15px;
+	  margin: 0 0 0 15px;
+	  min-height: 315px;
+}
+.infakont{
+	margin: 10px 0 0 0;
+    border-radius: 10px;
+    background-color: #F0F3F2;
+}
+.borderrad{
+	border-radius: 10px;
+    background-color: #F0F3F2;
+
+}
+#borderlogreal{
+	    border-radius: 50px;
+    background-color: #F0F3F2;
+        margin: 15px auto;
+    width: 737px;
+    padding: 25px 0 20px 0px;
+    border: 10px solid #5E7EC2;
+}
+#kart{
+	float: left;
+	    padding: 0 0 13px 0;
+}

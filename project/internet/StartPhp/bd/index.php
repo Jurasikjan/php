@@ -30,17 +30,54 @@ include_once 'conect.php';
     // UPDATE news SET status='0' WHERE id=1; обновляем таблицу news там status=0 где id=1
 
 // mysqli_affected_rows($con) - возвращает количество обработаных строк
+
+
+//SELECT ято выбрать
+//FROM таблица
+//where условия
+//group by поле
+//order by поле
+//limit количество
+
+//$row1 = mysqli_fetch_array($otvet); // возвращает строку ПО ОЧЕРЕДИ
+
+//  Агригатные функции
+//
+//count - количество строк в таблице
+//sum - сумма значения выброного поля
+//avg - среднее значения по выброному полю
+//max min - наибольшее и наименьшее значения данного поля
+
+//select count (*) from news;
+//select count (*) from news where id=1;
+//select MAX (id) from news;
+//select MAX (id) AS max from news; переименновывает поле в результате
+
+
+//select * from news GROUP BY content ; в результате выводит неповторяющиеся даные с этой  колонке
+
+
+//select name, count(*) from user group by name; в результате групировка по именни плюс еще колонка
+// count количество одинаковых имен
+
+
+
 $con = conectToMysql();
 if(isset($_POST['otpravit']))
 {
 
 //   $ins= "INSERT INTO `news_category` (`name`, `descroption`,sort_order,status) VALUES ('".$_POST['name']."', '".$_POST['descroption']."')";
-   $ins= "INSERT INTO `news_category` (`name`, `descroption`,sort_order,status) VALUES ('%s','%s','%d','%d')";
-   $ins=sprintf($ins,$_POST['name'],$_POST['descroption'],$_POST['sort_order'],$_POST['status']);
-   $info=mysqli_query($con,$ins);
+$ins= "INSERT INTO `news_category` (`name`, `descroption`,sort_order,status) VALUES ('%s','%s','%d','%d')";
+$ins=sprintf($ins,$_POST['name'],$_POST['descroption'],$_POST['sort_order'],$_POST['status']);
+$info=mysqli_query($con,$ins);
+var_dump($info+' zapros');
 }
+
 $select_news_category="SELECT * FROM `news_category`";
 $otvet=mysqli_query($con,$select_news_category);
+
+$count = mysqli_num_rows($otvet);// количество записей
+//$row1 = mysqli_fetch_array($otvet); // возвращает строку ПО ОЧЕРЕДИ
 ?>
 
 <!doctype html>
@@ -62,8 +99,14 @@ $otvet=mysqli_query($con,$select_news_category);
             <input type="submit" value="otpravit" name="otpravit">
         </form>
     <pre>
+        <br>
         <?php
-        print_r($otvet);
+        if($count){
+            while ($row = mysqli_fetch_array($otvet))
+            {
+                echo $row['id']." | ".$row['name']." | ".$row['descroption']." | ".$row['sort_order']." | ".$row['status']."<br>";
+            }
+        }
         ?>
     </pre>
 </body>
