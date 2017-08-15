@@ -5,7 +5,8 @@
  * Date: 14.08.2017
  * Time: 17:06
  */
-$con = mysqli_connect("194.54.90.53", "adminre_yura", "55545", "adminre_price");
+//$con = mysqli_connect("194.54.90.53", "adminre_yura", "55545", "adminre_price");
+$con = mysqli_connect("localhost", "root", "", "adminre_price");
 mysqli_set_charset($con, "utf8");
 
 if (mysqli_connect_errno()) {

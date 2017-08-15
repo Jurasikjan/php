@@ -11,6 +11,7 @@ if(!empty($_COOKIE['name']))
     setcookie('pass','');
     header("Location: price.php");
 }
+
 if(isset($_POST['sub'])) {
     $name = $_POST['name'];
     $pass = $_POST['pass'];
@@ -56,10 +57,18 @@ if(isset($_POST['sub'])) {
 </head>
 <body>
         <form method="post" action="user.php">
-            <pre>
-               Login: <input type="text" name="name">
-               Password: <input type="password" name="pass">
-                <input type="submit" value="Вход" name="sub"> 
+            <table style="text-align: center; margin: 0 auto;">
+                <tr>
+                    <td>Login: <input type="text" name="name"></td>
+                    <td>Password: <input type="password" name="pass"></td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Вход" name="sub" style="width: 100%">
+                    </td>
+                </tr>
+            </table>
+
             </pre>
         </form>
 </body>
