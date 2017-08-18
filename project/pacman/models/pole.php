@@ -7,14 +7,19 @@
  */
 
 class Pole {
-    public $arr;
+    private $arr;
+    private $width;
+    private $hedth;
 
-    public function __construct()
+    public function __construct($width,$heidth)
     {
-        for ($i=0;$i<10;$i++)
+        $this->width=$width;
+        $this->hedth=$heidth;
+
+        for ($i=0;$i<$width;$i++)
         {
             $mas=array();
-            for ($j=0;$j<10;$j++)
+            for ($j=0;$j<$heidth;$j++)
             {
                $mas[]=0;
             }
@@ -32,5 +37,7 @@ class Pole {
             echo '<br>';
 
         }
+
     }
+
 }

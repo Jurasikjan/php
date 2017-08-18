@@ -8,7 +8,7 @@
 
 require_once 'models/pole.php';
 
-$pole=new Pole();
+$pole=new Pole(10,10);
 ?>
 <!doctype html>
 <html lang="en">
@@ -22,6 +22,7 @@ $pole=new Pole();
 <body>
 <?php
     $pole->printPole();
+include_once 'function.php';
 ?>
 </body>
 </html>
