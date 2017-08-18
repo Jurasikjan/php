@@ -39,7 +39,14 @@ include_once 'fail/conectBD.php';
         <table class="tab" cellspacing="0">
             <tr class="strokaprice">
                 <td align="center" rowspan="2">НПЗ</td>
-                <td colspan="4"><h4>цена в гривнях за литр</h4><h4>10.08.17</h4>
+                <?php
+
+                $select_price = "SELECT * FROM `data`";
+                $otv = mysqli_query($con, $select_price);
+                $row = mysqli_fetch_array($otv);
+
+                ?>
+                <td colspan="4"><h4>цена в гривнях за литр</h4><h4><?php echo $row['data'];?></h4>
                     <?php
                         if(!empty($_COOKIE['name']))
                         {

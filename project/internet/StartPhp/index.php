@@ -19,3 +19,8 @@ echo "<a href='forms.php'>forms</a><br>";
 echo "<a href='cooci.php'>coociAndSession</a><br>";
 echo "<a href='session.php'>session</a><br>";
 echo "<a href='bd/index.php'>BD</a><br>";
+echo "<hr>OOP<br>";
+echo "<a href='OOP/class.php'>class</a><br>";
+echo "<a href='OOP/nasledovanie.php'>nasledovanie</a><br>";
+echo "<a href='OOP/scince/publications.php'>polimorfizm</a><br>";
+echo "<a href='OOP/frontControler/index.php'>frontControler</a><br>";
