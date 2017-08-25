@@ -14,8 +14,8 @@ function contecMsq(){
     }
     return $con;
 }
-function printInfa($otvet){
-    while ($row = mysqli_fetch_array($otvet))
+function getTable($zapros){
+    while ($row = mysqli_fetch_array($zapros))
     {
         echo $row['id']." | ".$row['name']." | ".$row['descroption']." | ".$row['sort_order']." | ".$row['status']."<br>";
     }

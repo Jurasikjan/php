@@ -7,5 +7,7 @@
  */
 include '../model/emkost.php';
 
-$emk=new Emkost('',20);
-$emk->printInfa();
+$emk=new Emkost();
+
+$emk->printTable();
+
