@@ -2,31 +2,19 @@
 /**
  * Created by PhpStorm.
  * User: Юра
- * Date: 24.08.2017
- * Time: 17:06
+ * Date: 26.09.2017
+ * Time: 16:24
  */
-class Prihod{
+class vidPrihod{
     public $id;
-    public $id_emkost;
-   public $data;
-   public $id_vid;
-    public $kol;
-    public $pl;
-    public $id_human;
-    public $vid_prihod;
-    public $price;
+    public $vid;
 
-    function __construct($id='',$id_emkost='',$data='',$id_vid='',$kol='',$pl='',$id_human='',$vid_prihod='',$price='')
+    private $con;
+
+    function __construct($id='',$vid='')
     {
         $this->id=$id;
-        $this->id_emkost=$id_emkost;
-        $this->data= $data;
-        $this->id_vid= $id_vid;
-        $this->kol= $kol;
-        $this->pl= $pl;
-        $this->id_human= $id_human;
-        $this->vid_prihod= $vid_prihod;
-        $this->price= $price;
+        $this->vid=$vid;
         $this->con=contecMsq();
     }
 
