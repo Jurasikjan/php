@@ -18,3 +18,4 @@ include_once 'function.php';
             <input type="submit" value="azsRashod" name="azsRashod">
         </form>
 <hr>
+<h3 style="text-align: center">От <input type="date" value="<?php echo date("Y-m-d");?>" id="OtdateDb"> До <input type="date" value="<?php echo date("Y-m-d");?>" id="OtdateDb"></h3>

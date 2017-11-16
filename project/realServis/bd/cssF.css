@@ -1,0 +1,29 @@
+
+table {
+    width: 100%; /* Ширина таблицы */
+    border: 2px solid black; /* Рамка вокруг таблицы */
+    border-collapse: collapse; /* Отображать только одинарные линии */
+    text-align: center;
+    table-layout: fixed;
+}
+table tr {
+    text-align: center; /* Выравнивание по левому краю */
+    background: white; /* Цвет фона ячеек */
+    /*padding: 5px;  Поля вокруг содержимого ячеек */
+    border: 1px solid black;  /*Граница вокруг ячеек */
+    width: 100%;
+}
+table td {
+    padding: 10px; /* Поля вокруг содержимого ячеек */
+    width: 100%;
+    border: 1px solid black;  /*Граница вокруг ячеек */
+}
+
+td input{
+    width: 100%;
+    min-width: 50px;
+}
+td select{
+    width: 100%;
+    min-width: 50px;
+}
