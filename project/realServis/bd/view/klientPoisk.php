@@ -5,10 +5,10 @@
  * Date: 16.11.2017
  * Time: 13:24
  */
-include_once '..\model\human.php';
+include_once '../model/human.php';
+include_once '../function.php';
 
 $human = new Human();
-
 $masSpisik = $human->getAll();
 
 

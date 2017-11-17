@@ -1,6 +1,17 @@
 <?php
 session_start();
+if(!isset($_SESSION['otDate']))
+{
+    $_SESSION['otDate']=date("Y-m-d");
+    $_SESSION['doDate']=date("Y-m-d");
+}
+if(isset($_POST['OtdateDb']))
+{
+    $_SESSION = array();
+    $_SESSION['otDate']=$_POST['OtdateDb'];
+    $_SESSION['doDate']=$_POST['DodateDb'];
 
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -19,6 +30,10 @@ session_start();
           include_once 'view/header.php';
         ?>
     </header>
+    <form method="post">
+        <h3 style="text-align: center">От <input type="date" value="<?php echo $_SESSION['otDate'];?>" name="OtdateDb"> До            <input type="date" value="<?php echo $_SESSION['doDate'];?>" name="DodateDb"><input type="submit" value="Ok"></h3>
+
+    </form>
 
     <?php
     if(isset($_POST['vseEmkosti']) ||  $_SESSION['vseEmkosti']){

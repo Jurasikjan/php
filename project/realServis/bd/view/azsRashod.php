@@ -1,3 +1,4 @@
+
 <?php
 /**
  * Created by PhpStorm.
@@ -5,29 +6,44 @@
  * Date: 14.11.2017
  * Time: 12:54
  */
+include_once './model/azsRashod.php';
+include_once './model/human.php';
+
 $vid=new Vid();
+$dataAzsRashod = new AzsRashod();
+$human = new Human();
+$zaPeriyd = $dataAzsRashod->getAll($_SESSION['otDate'], $_SESSION['doDate']);
 
-if (empty($_SESSION['azsRashodAdd']) || empty($_SESSION['azsRashodAddB'])) {
-    $_SESSION['azsRashodAdd'] = 1;
-    $_SESSION['azsRashodAddB'] = 1;
-    $_SESSION['azsRashodMass'] = array(array());
-    $_SESSION['azsRashodMassB'] = array(array());
-}
-if (isset($_POST['zapisat'])) {
-    $ad = 0;
-    for ($i = 0; $i < $_SESSION['azsRashodAdd']; $i++) {
-        if (!empty($_POST['kol_' . $i])) {
 
-            $_SESSION['azsRashodMass'][$i][0] = $_POST['Komy_' . $i];
-            $_SESSION['azsRashodMass'][$i][1] = $_POST['VidTop_' . $i];
-            $_SESSION['azsRashodMass'][$i][2] = $_POST['kol_' . $i];
-            $_SESSION['azsRashodMass'][$i][3] = $_POST['price_' . $i];
-            $_SESSION['azsRashodMass'][$i][4] = $_POST['summ_' . $i];
+//читаем из AzsRashod
+if (!empty($zaPeriyd)) {
+    foreach ($zaPeriyd as $str => $value) {
+        $_SESSION['azsRashodMass'][$str][0] = $human->getId($value['human_id'])->imy;
+        $_SESSION['azsRashodMass'][$str][1] = $value['vid'];
+        $_SESSION['azsRashodMass'][$str][2] = $value['kol'];
+        $_SESSION['azsRashodMass'][$str][3] = $value['price'];
+        $_SESSION['azsRashodMass'][$str][4] = $value['summ'];
 
-        } else {
-            $ad++;
-        }
     }
+    $_SESSION['azsRashodAdd'] = count($zaPeriyd) + 1;
+}
+//запись
+if (isset($_POST['zapisat'])) {
+    $i = $_SESSION['azsRashodAdd']-1;
+
+    if (!empty($_POST['kol_' . $i])) {
+        $_SESSION['azsRashodAdd']+=1;
+        $_SESSION['azsRashodMass'][$i][0] = $_POST['Komy_' . $i];
+        $_SESSION['azsRashodMass'][$i][1] = $_POST['VidTop_' . $i];
+        $_SESSION['azsRashodMass'][$i][2] = $_POST['kol_' . $i];
+        $_SESSION['azsRashodMass'][$i][3] = $_POST['price_' . $i];
+        $_SESSION['azsRashodMass'][$i][4] = $_POST['summ_' . $i];
+
+        $dataAzsRashod = new AzsRashod('', 3, $_POST['VidTop_' . $i], $_POST['kol_' . $i], $_POST['price_' . $i], $_POST['summ_' . $i], $_SESSION['doDate']);
+        $dataAzsRashod->addThis();
+
+    }
+
     //Beznal
     $adB = 0;
     for ($i = 0; $i < $_SESSION['azsRashodAddB']; $i++) {
@@ -43,26 +59,25 @@ if (isset($_POST['zapisat'])) {
             $adB++;
         }
     }
-    if ($ad == 0) {
-        $_SESSION['azsRashodAdd'] += 1;
-    }
     if ($adB == 0) {
         $_SESSION['azsRashodAddB'] += 1;
     }
 
 }
+//проверяем количество
+if (empty($_SESSION['azsRashodAdd']) || empty($_SESSION['azsRashodAddB'])) {
+    $_SESSION['azsRashodAdd'] = 1;
+    $_SESSION['azsRashodAddB'] = 1;
+    $_SESSION['azsRashodMass'] = array(array());
+    $_SESSION['azsRashodMassB'] = array(array());
+}
+
 
 if(isset($_POST['klientPoisk'])){
     list($name,$id)=explode('_',$_POST['klientPoisk']);
     $_SESSION['azsRashodMassB'][$_POST['str']][0]=$name;
-
-
 }
 ?>
-<style >
-
-</style>
-
 <form method="post" action="">
 
 <table style="border: 0px">
@@ -110,7 +125,7 @@ if(isset($_POST['klientPoisk'])){
                         echo "
                 </select>
             </td>
-         <td><input id='kol_" . $i . "' type='text' value='" . $_SESSION['azsRashodMass'][$i][2] . "' name='kol_" . $i . "' onchange='summ(\"" . $i . "\")'></td>
+         <td><input id='kol_" . $i . "' type='text' value='" . $_SESSION['azsRashodMass'][$i][2] . "' name='kol_" . $i . "' onkeyup='summ(\"" . $i . "\")'></td>
            <td><input id='price_" . $i . "' type='text' value='" . $_SESSION['azsRashodMass'][$i][3] . "' name='price_" . $i . "' onkeyup='summ(\"" . $i . "\")'></td>
            <td><input  id='summ_" . $i . "' type='text' value='" . $_SESSION['azsRashodMass'][$i][4] . "' name='summ_" . $i . "'></td>
         </tr>";
@@ -178,9 +193,5 @@ if(isset($_POST['klientPoisk'])){
         var n2 = document.getElementById('kol_' + i).value;
         document.getElementById('summ_' + i).value = n1 * n2;
     }
-    function reset() {
-        <?php
-        // session_abort();
-        ?>
-    }
+
 </script>
