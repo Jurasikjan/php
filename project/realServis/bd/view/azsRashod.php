@@ -11,14 +11,22 @@ include_once './model/human.php';
 
 $vid=new Vid();
 $dataAzsRashod = new AzsRashod();
+$dataAzsRashod_B = new AzsRashod_B();
 $human = new Human();
 $zaPeriyd = $dataAzsRashod->getAll($_SESSION['otDate'], $_SESSION['doDate']);
+$zaPeriyd_B = $dataAzsRashod_B->getAll($_SESSION['otDate'], $_SESSION['doDate']);
 
-
+//проверяем количество
+if (empty($_SESSION['azsRashodAdd']) || empty($_SESSION['azsRashodAddB'])) {
+    $_SESSION['azsRashodAdd'] = 1;
+    $_SESSION['azsRashodAddB'] = 1;
+    $_SESSION['azsRashodMass'] = array(array());
+    $_SESSION['azsRashodMassB'] = array(array());
+}
 //читаем из AzsRashod
 if (!empty($zaPeriyd)) {
     foreach ($zaPeriyd as $str => $value) {
-        $_SESSION['azsRashodMass'][$str][0] = $human->getId($value['human_id'])->imy;
+        $_SESSION['azsRashodMass'][$str][0] = $value['human_id'];
         $_SESSION['azsRashodMass'][$str][1] = $value['vid'];
         $_SESSION['azsRashodMass'][$str][2] = $value['kol'];
         $_SESSION['azsRashodMass'][$str][3] = $value['price'];
@@ -27,9 +35,19 @@ if (!empty($zaPeriyd)) {
     }
     $_SESSION['azsRashodAdd'] = count($zaPeriyd) + 1;
 }
+if (!empty($zaPeriyd_B)) {
+    foreach ($zaPeriyd_B as $str => $value) {
+        $_SESSION['azsRashodMassB'][$str][0][0] = $human->getId($value['human_id'])->imy;
+        $_SESSION['azsRashodMassB'][$str][1] = $value['vid'];
+        $_SESSION['azsRashodMassB'][$str][2] = $value['kol'];
+
+    }
+    $_SESSION['azsRashodAddB'] = count($zaPeriyd_B) + 1;
+}
 //запись
 if (isset($_POST['zapisat'])) {
     $i = $_SESSION['azsRashodAdd']-1;
+    $ib = $_SESSION['azsRashodAddB']-1;
 
     if (!empty($_POST['kol_' . $i])) {
         $_SESSION['azsRashodAdd']+=1;
@@ -45,37 +63,19 @@ if (isset($_POST['zapisat'])) {
     }
 
     //Beznal
-    $adB = 0;
-    for ($i = 0; $i < $_SESSION['azsRashodAddB']; $i++) {
-        if (!empty($_POST['kolB_' . $i])) {
-
-            $_SESSION['azsRashodMassB'][$i][0] = $_POST['KomyB_' . $i];
-            $_SESSION['azsRashodMassB'][$i][1] = $_POST['VidTopB_' . $i];
-            $_SESSION['azsRashodMassB'][$i][2] = $_POST['kolB_' . $i];
-            $_SESSION['azsRashodMassB'][$i][3] = $_POST['priceB_' . $i];
-            $_SESSION['azsRashodMassB'][$i][4] = $_POST['summB_' . $i];
-
-        } else {
-            $adB++;
-        }
-    }
-    if ($adB == 0) {
+    if (!empty($_POST['kolB_' . $ib])) {
         $_SESSION['azsRashodAddB'] += 1;
+        $_SESSION['azsRashodMassB'][$ib][0][0] = $_POST['KomyB_' . $ib];
+        $_SESSION['azsRashodMassB'][$ib][0][1] = $_POST['id_' . $ib];
+        $_SESSION['azsRashodMassB'][$ib][1] = $_POST['VidTopB_' . $ib];
+        $_SESSION['azsRashodMassB'][$ib][2] = $_POST['kolB_' . $ib];
+
+
+        $dataAzsRashod_B = new AzsRashod_B('',  $_SESSION['azsRashodMassB'][$ib][0][1], $_POST['VidTopB_' . $ib], $_POST['kolB_' . $ib], $_SESSION['doDate']);
+        $dataAzsRashod_B->addThis();
+
     }
 
-}
-//проверяем количество
-if (empty($_SESSION['azsRashodAdd']) || empty($_SESSION['azsRashodAddB'])) {
-    $_SESSION['azsRashodAdd'] = 1;
-    $_SESSION['azsRashodAddB'] = 1;
-    $_SESSION['azsRashodMass'] = array(array());
-    $_SESSION['azsRashodMassB'] = array(array());
-}
-
-
-if(isset($_POST['klientPoisk'])){
-    list($name,$id)=explode('_',$_POST['klientPoisk']);
-    $_SESSION['azsRashodMassB'][$_POST['str']][0]=$name;
 }
 ?>
 <form method="post" action="">
@@ -107,7 +107,7 @@ if(isset($_POST['klientPoisk'])){
                         {
                             echo "
         <tr>
-            <td><input type='text' value='потребитель' name='Komy_" . $i . "'></td>
+            <td><input type='text' value='' name='Komy_" . $i . "'></td>
             ";
                         }
                         echo "
@@ -150,13 +150,13 @@ if(isset($_POST['klientPoisk'])){
             if(!empty($_SESSION['azsRashodMassB'][$i][0])) {
                 echo "
         <tr>
-            <td><input type='text' value='" . $_SESSION['azsRashodMassB'][$i][0] . "' name='KomyB_" . $i . "'><a href='view/klientPoisk.php?i=".$i."'>Выбор...</a></td>
+            <td><div id='humanserch_" . $i . "'></div><input type='text' value='" . $_SESSION['azsRashodMassB'][$i][0][0] . "' name='KomyB_" . $i . "' id='KomyB_" . $i . "' onkeyup='viborHuman(" . $i . ")' autocomplete='off'><input type='hidden' id='id_" . $i . "' name='id_" . $i . "'></td>
             ";
             }else
             {
                 echo "
         <tr>
-            <td><input type='text' value='' name='KomyB_" . $i . "'><a href='view/klientPoisk.php?i=".$i."'>Выбор...</a></td>
+            <td><div id='humanserch_" . $i . "'></div><input type='text' value='' name='KomyB_" . $i . "' id='KomyB_" . $i . "' onkeyup='viborHuman(" . $i . ")' autocomplete='off'><input type='hidden' id='id_" . $i . "' name='id_" . $i . "'></td>
             ";
             }
             echo "
@@ -174,7 +174,7 @@ if(isset($_POST['klientPoisk'])){
             echo "
                 </select>
             </td>
-         <td><input id='kolB_" . $i . "' type='text' value='" . $_SESSION['azsRashodMassB'][$i][2] . "' name='kolB_" . $i . "' onchange='summ(\"" . $i . "\")'></td>
+         <td><input id='kolB_" . $i . "' type='text' value='" . $_SESSION['azsRashodMassB'][$i][2] . "' name='kolB_" . $i. "'></td>
             </tr>";
         }
         ?>
@@ -185,13 +185,48 @@ if(isset($_POST['klientPoisk'])){
 </table>
     <input type="submit" value="zapisat" name="zapisat">
 </form>
+
+
 <script>
 
     function summ(i) {
-
         var n1 = document.getElementById('price_' + i).value;
         var n2 = document.getElementById('kol_' + i).value;
         document.getElementById('summ_' + i).value = n1 * n2;
     }
 
+    function viborHuman(i) {
+        var request;
+        if (window.XMLHttpRequest) {
+            request = new XMLHttpRequest();
+        } else {
+            request = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        var sim = document.getElementById('KomyB_' + i).value;
+
+        request.open('GET', './control/klientPoisk.php?simvol='+sim+'&i='+i);
+        request.onreadystatechange = function() {
+            if ((request.readyState===4) && (request.status===200)) {
+                var items = JSON.parse(request.responseText);
+                var output = '<select id="vibor_'+i+'" size="'+items.col+'">';
+                for (var key in items.imy) {
+                    output += '<option onclick="vibrat('+i+','+items.id[key]+')">' + items.imy[key] + '</option>';
+                }
+                output += '</select>';
+
+                document.getElementById('humanserch_'+i).innerHTML = output;
+            }
+        }
+
+        request.send();
+    }
+    function vibrat(i,id) {
+        var sim = document.getElementById('vibor_' + i).value;
+       document.getElementById('KomyB_' + i).value=sim;
+        document.getElementById('humanserch_'+i).innerHTML="";
+        document.getElementById('id_'+i).value=id;
+
+
+    }
 </script>

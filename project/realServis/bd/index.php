@@ -1,5 +1,8 @@
 <?php
 session_start();
+include_once 'function.php';
+include_once './control/setcooc.php';
+
 if(!isset($_SESSION['otDate']))
 {
     $_SESSION['otDate']=date("Y-m-d");
@@ -73,11 +76,12 @@ if(isset($_POST['OtdateDb']))
 
 
 
+echo "<pre>";
     echo "POST";
     print_r($_POST);
-    echo "SES";
     print_r($_SESSION);
-    //  echo "SESSION "; print_r($_SESSION);
+
+echo "</pre>";
     ?>
 </body>
 </html>

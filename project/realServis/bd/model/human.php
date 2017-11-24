@@ -5,7 +5,7 @@
  * Date: 24.08.2017
  * Time: 17:13
  */
-
+include_once 'C:\Server\OpenServer\domains\php\project\realServis\bd\function.php';
 class Human{
     public $id;
     public $imy;
